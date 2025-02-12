@@ -1,0 +1,324 @@
+[33mcommit 20de37ff94d63a1b912ce406c60a3cb1bd51d1ed[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: U1Kemp <utpalrajkemprai2001@gmail.com>
+Date:   Wed Feb 12 14:23:14 2025 +0000
+
+    implemented version control using dvc
+
+[1mdiff --git a/Assignment2/prepare.ipynb b/Assignment2/prepare.ipynb[m
+[1mindex 0fe14da..738e719 100644[m
+[1m--- a/Assignment2/prepare.ipynb[m
+[1m+++ b/Assignment2/prepare.ipynb[m
+[36m@@ -32,7 +32,7 @@[m
+   },[m
+   {[m
+    "cell_type": "code",[m
+[31m-   "execution_count": 2,[m
+[32m+[m[32m   "execution_count": 36,[m
+    "metadata": {},[m
+    "outputs": [],[m
+    "source": [[m
+[36m@@ -82,8 +82,8 @@[m
+     "\n",[m
+     "# function to print variable distribution\n",[m
+     "def print_variable_distribution(data, file_name):\n",[m
+[31m-    "    print(\"Number of 0s in \" + file_name + \" - \" + str(len(data) - data.spam.sum()))\n",[m
+[31m-    "    print(\"Number of 1s in \" + file_name + \" - \" + str(data.spam.sum()))"[m
+[32m+[m[32m    "    print(\"Number of 0s in \" + file_name + \" - \" + str(len(data) - data.label.sum()))\n",[m
+[32m+[m[32m    "    print(\"Number of 1s in \" + file_name + \" - \" + str(data.label.sum()))"[m
+    ][m
+   },[m
+   {[m
+[36m@@ -782,7 +782,7 @@[m
+   },[m
+   {[m
+    "cell_type": "code",[m
+[31m-   "execution_count": null,[m
+[32m+[m[32m   "execution_count": 24,[m
+    "metadata": {},[m
+    "outputs": [[m
+     {[m
+[36m@@ -833,7 +833,30 @@[m
+       "To enable auto staging, run:\n",[m
+       "\n",[m
+       "\tdvc config core.autostage true\n",[m
+[31m-      "\u001b[0m"[m
+[32m+[m[32m      "\u001b[?25l\u001b[32m⠋\u001b[0m Checking graph                                       core\u001b[39m>\n",[m
+[32m+[m[32m      "Adding...                                                                       \n",[m
+[32m+[m[32m      "!\u001b[A\n",[m
+[32m+[m[32m      "Collecting files and computing hashes in data/test.csv |0.00 [00:00,     ?file/s\u001b[A\n",[m
+[32m+[m[32m      "                                                                                \u001b[A\n",[m
+[32m+[m[32m      "!\u001b[A\n",[m
+[32m+[m[32m      "  0% Checking cache in '/home/utpalraj/coursework/AML/AppliedMachineLearning/Ass\u001b[A\n",[m
+[32m+[m[32m      "                                                                                \u001b[A\n",[m
+[32m+[m[32m      "!\u001b[A\n",[m
+[32m+[m[32m      "  0%|          |Adding data/test.csv to cache         0/1 [00:00<?,     ?file/s]\u001b[A\n",[m
+[32m+[m[32m      "                                                                                \u001b[A\n",[m
+[32m+[m[32m      "!\u001b[A\n",[m
+[32m+[m[32m      "  0%|          |Checking out /home/utpalraj/coursework0/1 [00:00<?,    ?files/s]\u001b[A\n",[m
+[32m+[m[32m      "100% Adding...|████████████████████████████████████████|1/1 [00:00, 17.24file/s]\u001b[A\n",[m
+[32m+[m[32m      "\n",[m
+[32m+[m[32m      "To track the changes with git, run:\n",[m
+[32m+[m[32m      "\n",[m
+[32m+[m[32m      "\tgit add data/test.csv.dvc\n",[m
+[32m+[m[32m      "\n",[m
+[32m+[m[32m      "To enable auto staging, run:\n",[m
+[32m+[m[32m      "\n",[m
+[32m+[m[32m      "\tdvc config core.autostage true\n",[m
+[32m+[m[32m      "\u001b[0m[detached HEAD 3eb4bc5] Added train, validation and test data for SEED2\n",[m
+[32m+[m[32m      " 4 files changed, 46 insertions(+), 39 deletions(-)\n"[m
+      ][m
+     }[m
+    ],[m
+[36m@@ -854,39 +877,16 @@[m
+   },[m
+   {[m
+    "cell_type": "code",[m
+[31m-   "execution_count": 32,[m
+[32m+[m[32m   "execution_count": 25,[m
+    "metadata": {},[m
+    "outputs": [[m
+     {[m
+      "name": "stdout",[m
+      "output_type": "stream",[m
+      "text": [[m
+[31m-      "\u001b[33m007735c\u001b[m\u001b[33m (\u001b[m\u001b[1;36mHEAD\u001b[m\u001b[33m)\u001b[m Added train, validation and test data for SEED2\n",[m
+[31m-      "\u001b[33mbb117d1\u001b[m Added train, validation and test data for SEED1\n",[m
+[31m-      "\u001b[33m3373ed2\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m6769486\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33mc636675\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m2a43917\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m0d7987c\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m5ae244a\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33mb6d5f0c\u001b[m Added train, validation and test data for SEED2\n",[m
+[31m-      "\u001b[33m24ba264\u001b[m Added train, validation and test data for SEED1\n",[m
+[31m-      "\u001b[33ma89499a\u001b[m Added train, validation and test data for SEED1\n",[m
+[31m-      "\u001b[33m412d939\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33med4422c\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m74cfbb1\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m07450eb\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33mbd49797\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m271529a\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33maf419cc\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m57052c5\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m993a810\u001b[m Adding Gdrive as Remote\n",[m
+[31m-      "\u001b[33m3a04280\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m4f460cb\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33md860e38\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m7d44a4e\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m4b1db74\u001b[m Added raw_data.csv\n",[m
+[31m-      "\u001b[33m856daa6\u001b[m Adding Gdrive as Remote\n",[m
+[32m+[m[32m      "\u001b[33m3eb4bc5\u001b[m\u001b[33m (\u001b[m\u001b[1;36mHEAD\u001b[m\u001b[33m)\u001b[m Added train, validation and test data for SEED2\n",[m
+[32m+[m[32m      "\u001b[33m2ab030d\u001b[m Added train, validation and test data for SEED1\n",[m
+[32m+[m[32m      "\u001b[33mc06e4a6\u001b[m Added raw_data.csv\n",[m
+       "\u001b[33m4e5e5e6\u001b[m\u001b[33m (\u001b[m\u001b[1;31morigin/main\u001b[m\u001b[33m, \u001b[m\u001b[1;31morigin/HEAD\u001b[m\u001b[33m)\u001b[m Minor correction\n",[m
+       "\u001b[33m4277718\u001b[m Corrected some minor errors\n",[m
+       "\u001b[33ma60f4a4\u001b[m Minor Change to train.ipynb\n",[m
+[36m@@ -912,8 +912,207 @@[m
+    "cell_type": "code",[m
+    "execution_count": null,[m
+    "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "Updated 0 paths from 11a9884\n",[m
+[32m+[m[32m      "Updated 1 path from 11a9884\n",[m
+[32m+[m[32m      "Updated 1 path from 11a9884\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "!git checkout e20be57 \"./data/train.csv.dvc\"\n",[m
+[32m+[m[32m    "!git checkout e20be57 \"./data/validation.csv.dvc\"\n",[m
+[32m+[m[32m    "!git checkout e20be57 \"./data/test.csv.dvc\""[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 33,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "Collecting                                            |0.00 [00:00,    ?entry/s]\n",[m
+[32m+[m[32m      "Fetching\n",[m
+[32m+[m[32m      "Building workspace index                              |5.00 [00:00,  331entry/s]\n",[m
+[32m+[m[32m      "Comparing indexes                                     |6.00 [00:00,  876entry/s]\n",[m
+[32m+[m[32m      "Applying changes                                      |3.00 [00:00,   130file/s]\n",[m
+[32m+[m[32m      "\u001b[33mM\u001b[0m       data/test.csv\n",[m
+[32m+[m[32m      "\u001b[33mM\u001b[0m       data/train.csv\n",[m
+[32m+[m[32m      "\u001b[33mM\u001b[0m       data/validation.csv\n",[m
+[32m+[m[32m      "\u001b[33mNo remote provided and no default remote set.\u001b[0m\n",[m
+[32m+[m[32m      "3 files modified\n",[m
+[32m+[m[32m      "\u001b[0m"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "!dvc pull"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 34,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "train = pd.read_csv('./data/train.csv')\n",[m
+[32m+[m[32m    "validate = pd.read_csv('./data/validation.csv')\n",[m
+[32m+[m[32m    "test = pd.read_csv('./data/test.csv')"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 38,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "Number of 0s in train.csv - 3384\n",[m
+[32m+[m[32m      "Number of 1s in train.csv - 517\n",[m
+[32m+[m[32m      "Number of 0s in validation.csv - 726\n",[m
+[32m+[m[32m      "Number of 1s in validation.csv - 110\n",[m
+[32m+[m[32m      "Number of 0s in test.csv - 717\n",[m
+[32m+[m[32m      "Number of 1s in test.csv - 120\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "print_variable_distribution(train, \"train.csv\")\n",[m
+[32m+[m[32m    "print_variable_distribution(validate, \"validation.csv\")\n",[m
+[32m+[m[32m    "print_variable_distribution(test, \"test.csv\")"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "markdown",[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "# Target Variable Distribution of the Updated Version of Data"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 39,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "\u001b[33m3eb4bc5\u001b[m\u001b[33m (\u001b[m\u001b[1;36mHEAD\u001b[m\u001b[33m)\u001b[m Added train, validation and test data for SEED2\n",[m
+[32m+[m[32m      "\u001b[33m2ab030d\u001b[m Added train, validation and test data for SEED1\n",[m
+[32m+[m[32m      "\u001b[33mc06e4a6\u001b[m Added raw_data.csv\n",[m
+[32m+[m[32m      "\u001b[33m4e5e5e6\u001b[m\u001b[33m (\u001b[m\u001b[1;31morigin/main\u001b[m\u001b[33m, \u001b[m\u001b[1;31morigin/HEAD\u001b[m\u001b[33m)\u001b[m Minor correction\n",[m
+[32m+[m[32m      "\u001b[33m4277718\u001b[m Corrected some minor errors\n",[m
+[32m+[m[32m      "\u001b[33ma60f4a4\u001b[m Minor Change to train.ipynb\n",[m
+[32m+[m[32m      "\u001b[33m57f6a3c\u001b[m updated notebooks\n",[m
+[32m+[m[32m      "\u001b[33m497550a\u001b[m updated notebooks\n",[m
+[32m+[m[32m      "\u001b[33m8c900f7\u001b[m Updated Notebooks\n",[m
+[32m+[m[32m      "\u001b[33mebfba18\u001b[m updated\n",[m
+[32m+[m[32m      "\u001b[33m4d1d301\u001b[m updated train.ipynb\n",[m
+[32m+[m[32m      "\u001b[33m4969443\u001b[m Updated Notebooks\n",[m
+[32m+[m[32m      "\u001b[33ma48d8d4\u001b[m Updated prepare.ipynb\n",[m
+[32m+[m[32m      "\u001b[33m52bbc8e\u001b[m Modified prepare.ipynb and generated output\n",[m
+[32m+[m[32m      "\u001b[33mf2a81a0\u001b[m Downloaded Data and Segmented\n",[m
+[32m+[m[32m      "\u001b[33meb4aabb\u001b[m Created prepare and train notebooks\n",[m
+[32m+[m[32m      "\u001b[33me9305a1\u001b[m Initial commit\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "!git log --oneline"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 40,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "Updated 1 path from eba9b99\n",[m
+[32m+[m[32m      "Updated 1 path from eba9b99\n",[m
+[32m+[m[32m      "Updated 1 path from eba9b99\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "!git checkout 3eb4bc5 \"./data/train.csv.dvc\"\n",[m
+[32m+[m[32m    "!git checkout 3eb4bc5 \"./data/validation.csv.dvc\"\n",[m
+[32m+[m[32m    "!git checkout 3eb4bc5 \"./data/test.csv.dvc\""[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 41,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "Collecting                                            |0.00 [00:00,    ?entry/s]\n",[m
+[32m+[m[32m      "Fetching\n",[m
+[32m+[m[32m      "Building workspace index                              |5.00 [00:00,  517entry/s]\n",[m
+[32m+[m[32m      "Comparing indexes                                     |6.00 [00:00,  868entry/s]\n",[m
+[32m+[m[32m      "Applying changes                                      |3.00 [00:00,   197file/s]\n",[m
+[32m+[m[32m      "\u001b[33mM\u001b[0m       data/train.csv\n",[m
+[32m+[m[32m      "\u001b[33mM\u001b[0m       data/validation.csv\n",[m
+[32m+[m[32m      "\u001b[33mM\u001b[0m       data/test.csv\n",[m
+[32m+[m[32m      "\u001b[33mNo remote provided and no default remote set.\u001b[0m\n",[m
+[32m+[m[32m      "3 files modified\n",[m
+[32m+[m[32m      "\u001b[0m"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "!dvc pull"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 42,[m
+[32m+[m[32m   "metadata": {},[m
+    "outputs": [],[m
+[31m-   "source": [][m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "train = pd.read_csv('./data/train.csv')\n",[m
+[32m+[m[32m    "validate = pd.read_csv('./data/validation.csv')\n",[m
+[32m+[m[32m    "test = pd.read_csv('./data/test.csv')"[m
+[32m+[m[32m   ][m
+[32m+[m[32m  },[m
+[32m+[m[32m  {[m
+[32m+[m[32m   "cell_type": "code",[m
+[32m+[m[32m   "execution_count": 43,[m
+[32m+[m[32m   "metadata": {},[m
+[32m+[m[32m   "outputs": [[m
+[32m+[m[32m    {[m
+[32m+[m[32m     "name": "stdout",[m
+[32m+[m[32m     "output_type": "stream",[m
+[32m+[m[32m     "text": [[m
+[32m+[m[32m      "Number of 0s in train.csv - 3379\n",[m
+[32m+[m[32m      "Number of 1s in train.csv - 522\n",[m
+[32m+[m[32m      "Number of 0s in validation.csv - 725\n",[m
+[32m+[m[32m      "Number of 1s in validation.csv - 111\n",[m
+[32m+[m[32m      "Number of 0s in test.csv - 723\n",[m
+[32m+[m[32m      "Number of 1s in test.csv - 114\n"[m
+[32m+[m[32m     ][m
+[32m+[m[32m    }[m
+[32m+[m[32m   ],[m
+[32m+[m[32m   "source": [[m
+[32m+[m[32m    "print_variable_distribution(train, \"train.csv\")\n",[m
+[32m+[m[32m    "print_variable_distribution(validate, \"validation.csv\")\n",[m
+[32m+[m[32m    "print_variable_distribution(test, \"test.csv\")"[m
+[32m+[m[32m   ][m
+   }[m
+  ],[m
+  "metadata": {[m
