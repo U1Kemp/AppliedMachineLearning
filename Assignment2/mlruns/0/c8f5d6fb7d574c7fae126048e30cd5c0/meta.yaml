@@ -1,0 +1,15 @@
+artifact_uri: file:///home/utpalraj/coursework/AML/AppliedMachineLearning/Assignment2/mlruns/0/c8f5d6fb7d574c7fae126048e30cd5c0/artifacts
+end_time: 1739686069706
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c8f5d6fb7d574c7fae126048e30cd5c0
+run_name: luminous-gnat-203
+run_uuid: c8f5d6fb7d574c7fae126048e30cd5c0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739686065052
+status: 3
+tags: []
+user_id: utpalraj

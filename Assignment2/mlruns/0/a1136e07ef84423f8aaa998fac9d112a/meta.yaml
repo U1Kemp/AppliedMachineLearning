@@ -1,0 +1,15 @@
+artifact_uri: file:///home/utpalraj/coursework/AML/AppliedMachineLearning/Assignment2/mlruns/0/a1136e07ef84423f8aaa998fac9d112a/artifacts
+end_time: 1739685996711
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a1136e07ef84423f8aaa998fac9d112a
+run_name: worried-fly-756
+run_uuid: a1136e07ef84423f8aaa998fac9d112a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739685990686
+status: 3
+tags: []
+user_id: utpalraj
