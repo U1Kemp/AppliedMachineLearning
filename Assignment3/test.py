@@ -85,13 +85,13 @@ def test_flask():
     # Start the Flask app in a separate process
     process = subprocess.Popen(["python", "app.py"])
     
-    # Test the / endpoint
+    # Test the /home endpoint
     response = requests.get("http://127.0.0.1:5000/")
     assert response.status_code == 200
     assert "Spam Classifier" in response.text
 
     # Test the /score endpoint
-    response = requests.post("http://127.0.0.1:5000/", data={"text": "Test message"})
+    response = requests.post("http://127.0.0.1:5000/score", data={"text": "Test message"})
     assert response.status_code == 200
     data = response.json()
     assert "prediction" in data and "propensity" in data
