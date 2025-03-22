@@ -2,7 +2,7 @@
 import pickle
 from score import score
 import requests
-import time
+import subprocess
 import os
 
 # Test Cases
@@ -73,43 +73,32 @@ def test_score():
     assert score("Hello, how are you today?", model, 0.5)[0] == 0  # Likely non-spam
     assert score("This is to confirm our meeting scheduled for tomorrow, March 13th, at 10:00 AM in the conference room. We'll be discussing the new marketing strategy.", model, 0.5)[0] == 0  # Likely non-spam
 
+
 def test_flask():
-    '''
-    Test the Flask app by launching it using the command line,
-    waiting for it to start, testing the response from the
-    localhost endpoint, and closing the app using the command
-    line.
+    """
+    Integration test for the Flask application.
 
-    This test ensures that the Flask app is running, the
-    localhost endpoint is accessible, and the response from the
-    app is in the expected format with the expected keys.
+    This test starts the Flask app in a separate process, sends requests to the app,
+    and checks the responses to ensure that the app is working correctly.
+    """
 
-    Returns: None
-    '''
-    try:
-        os.system("python app.py &")
+    # Start the Flask app in a separate process
+    process = subprocess.Popen(["python", "app.py"])
+    
+    # Test the / endpoint
+    response = requests.get("http://127.0.0.1:5000/")
+    assert response.status_code == 200
+    assert "Spam Classifier" in response.text
 
-        # Wait for the app to start
-        time.sleep(5)
-
-        # Test the response from the localhost endpoint
-        url = "http://localhost:5000/"
-        text_data = {"text": "This is a test text."}
-
-        try:
-            response = requests.post(url, json=text_data)
-            # Check if the response is successful (status code 200)
-            assert response.status_code == 200
-
-            # Check if the response has the expected keys
-            json_response = response.json()
-            assert "prediction" in json_response
-            assert "propensity" in json_response
-        except requests.exceptions.RequestException as e:
-            print(f"Request failed: {e}")
-            assert False
-
-    finally:
-        # Close the Flask app using the command line
-        os.system("pkill -f app.py")
-
+    # Test the /score endpoint
+    response = requests.post("http://127.0.0.1:5000/", data={"text": "Test message"})
+    assert response.status_code == 200
+    data = response.json()
+    assert "prediction" in data and "propensity" in data
+    assert isinstance(data["prediction"], bool)
+    assert isinstance(data["propensity"], float)
+    assert 0 <= data["propensity"] <= 1
+    assert data["prediction"] in [0, 1]
+    
+    # Stop the Flask app
+    process.kill()

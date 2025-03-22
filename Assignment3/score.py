@@ -3,8 +3,8 @@ from sklearn.base import BaseEstimator as estimator
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-
 import nltk
+
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -60,7 +60,6 @@ def score(text:str, model:estimator, threshold:float = 0.5) -> tuple[bool,float]
     
     # Preprocess the text
     tokens = preprocess_text(text)
-
     tokens = str(tokens)
 
     # Get the propensity score

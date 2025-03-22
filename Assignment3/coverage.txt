@@ -4,103 +4,15 @@ rootdir: /home/utpalraj/coursework/AML/AppliedMachineLearning/Assignment3
 plugins: cov-6.0.0, hydra-core-1.3.2
 collected 2 items
 
-test.py .F                                                               [100%]
-
-=================================== FAILURES ===================================
-__________________________________ test_flask __________________________________
-
-    def test_flask():
-        '''
-        Test the Flask app by launching it using the command line,
-        waiting for it to start, testing the response from the
-        localhost endpoint, and closing the app using the command
-        line.
-    
-        This test ensures that the Flask app is running, the
-        localhost endpoint is accessible, and the response from the
-        app is in the expected format with the expected keys.
-    
-        Returns: None
-        '''
-        try:
-            os.system("python app.py &")
-    
-            # Wait for the app to start
-            time.sleep(5)
-    
-            # Test the response from the localhost endpoint
-            url = "http://localhost:5000/"
-            text_data = {"text": "This is a test text."}
-    
-            try:
-                response = requests.post(url, json=text_data)
-                # Check if the response is successful (status code 200)
->               assert response.status_code == 200
-E               assert 500 == 200
-E                +  where 500 = <Response [500]>.status_code
-
-test.py:102: AssertionError
------------------------------ Captured stdout call -----------------------------
- * Serving Flask app 'app'
- * Debug mode: on
------------------------------ Captured stderr call -----------------------------
-[nltk_data] Downloading package punkt to /home/utpalraj/nltk_data...
-[nltk_data]   Package punkt is already up-to-date!
-[nltk_data] Downloading package stopwords to
-[nltk_data]     /home/utpalraj/nltk_data...
-[nltk_data]   Package stopwords is already up-to-date!
-[nltk_data] Downloading package wordnet to /home/utpalraj/nltk_data...
-[nltk_data]   Package wordnet is already up-to-date!
-WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
- * Running on http://127.0.0.1:5000
-Press CTRL+C to quit
- * Restarting with stat
-[nltk_data] Downloading package punkt to /home/utpalraj/nltk_data...
-[nltk_data]   Package punkt is already up-to-date!
-[nltk_data] Downloading package stopwords to
-[nltk_data]     /home/utpalraj/nltk_data...
-[nltk_data]   Package stopwords is already up-to-date!
-[nltk_data] Downloading package wordnet to /home/utpalraj/nltk_data...
-[nltk_data]   Package wordnet is already up-to-date!
- * Debugger is active!
- * Debugger PIN: 946-494-959
-127.0.0.1 - - [21/Mar/2025 17:53:46] "POST / HTTP/1.1" 500 -
-Traceback (most recent call last):
-  File "/home/utpalraj/coursework/AML/lib/python3.12/site-packages/flask/app.py", line 1536, in __call__
-    return self.wsgi_app(environ, start_response)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/utpalraj/coursework/AML/lib/python3.12/site-packages/flask/app.py", line 1514, in wsgi_app
-    response = self.handle_exception(e)
-               ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/utpalraj/coursework/AML/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/utpalraj/coursework/AML/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/utpalraj/coursework/AML/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/utpalraj/coursework/AML/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/utpalraj/coursework/AML/AppliedMachineLearning/Assignment3/app.py", line 118, in home
-    text = request.form['text']
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/home/utpalraj/coursework/AML/lib/python3.12/site-packages/werkzeug/datastructures/structures.py", line 238, in __getitem__
-    raise exceptions.BadRequestKeyError(key)
-werkzeug.exceptions.BadRequestKeyError: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
-KeyError: 'text'
+test.py ..                                                               [100%]
 
 ---------- coverage: platform linux, python 3.12.3-final-0 -----------
-Name       Stmts   Miss  Cover
-------------------------------
-app.py        20      6    70%
-score.py      29      3    90%
-test.py       41      5    88%
-------------------------------
-TOTAL         90     14    84%
+Name       Stmts   Miss  Cover   Missing
+----------------------------------------
+score.py      29      3    90%   53, 56, 59
+test.py       39      0   100%
+----------------------------------------
+TOTAL         68      3    96%
 
-=========================== short test summary info ============================
-FAILED test.py::test_flask - assert 500 == 200
-========================= 1 failed, 1 passed in 20.90s =========================
+
+============================== 2 passed in 7.58s ===============================

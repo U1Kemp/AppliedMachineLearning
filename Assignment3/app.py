@@ -12,10 +12,10 @@ warnings.filterwarnings("ignore")
 app = Flask(__name__)
 
 # load model
-# model = pickle.load(open('/home/utpalraj/coursework/AML/AppliedMachineLearning/Assignment3/model/best_model.pkl', "rb"))
 filename = os.path.join(os.path.dirname(__file__), "model", "best_model.pkl")
 model = pickle.load(open(filename, "rb"))
-# html template
+
+# html template for the home route
 html = """
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +97,6 @@ html = """
 </html>
 """
 
-
 # home route
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -117,18 +116,18 @@ def home():
     if request.method == 'POST':
         text = request.form['text']
 
-        prediction, probability = score(text, model, 0.50)
+        prediction, propensity = score(text, model, 0.50)
 
         response = {
             "prediction": prediction,
-            "propensity": probability
+            "propensity": propensity
         }
         
         return jsonify(response)
     
     else:
         return render_template_string(html)
-
+    
 # run app
 if __name__ == '__main__':
     app.run(debug=True)
