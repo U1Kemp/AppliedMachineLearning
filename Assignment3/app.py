@@ -81,7 +81,7 @@ html = """
 </head>
 <body>
     <h1>Spam Classifier</h1>
-    <form action="/" method="post">
+    <form action="/score" method="post">
         <label for="text">Enter Text:</label>
         <input type="text" id="text" name="text">
         <input type="submit" value="Classify">
@@ -98,35 +98,32 @@ html = """
 """
 
 # home route
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def home():
     """
-    Handle requests to the home route. 
+    Handle GET requests to the home route.
 
-    For GET requests, renders the HTML page for the spam classifier.
-    For POST requests, processes the submitted text, scores it using 
-    the model, and returns the prediction and propensity as a JSON response.
+    The home route renders the HTML template for the web form.
+    """
+    return render_template_string(html)
+
+# score endpoint
+@app.route('/score', methods=['POST'])
+def score_endpoint():
+    """
+    Handle POST requests to the score endpoint.
+
+    The score endpoint processes the submitted text and scores it using the model.
+    The prediction and propensity are returned as a JSON response.
 
     Returns:
-        JSON: A JSON response for POST requests containing the prediction 
-              and propensity.
-        str: An HTML string for GET requests to render the spam classifier page.
+        JSON: A JSON response containing the prediction and propensity.
     """
-
-    if request.method == 'POST':
-        text = request.form['text']
-
-        prediction, propensity = score(text, model, 0.50)
-
-        response = {
-            "prediction": prediction,
-            "propensity": propensity
-        }
-        
-        return jsonify(response)
     
-    else:
-        return render_template_string(html)
+    text = request.form['text']
+    prediction, probability = score(text, model, 0.50)
+    response = {'prediction': prediction, 'propensity': probability}
+    return jsonify(response)
     
 # run app
 if __name__ == '__main__':
